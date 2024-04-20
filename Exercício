@@ -1,0 +1,58 @@
+CREATE TABLE Fornecedor 
+( 
+ Código INT PRIMARY KEY,  
+ Nome VARCHAR(n),  
+ CNPJ INT,  
+ Endereço VARCHAR(n),  
+);
+
+CREATE TABLE Produto 
+( 
+ Código INT PRIMARY KEY,  
+ Nome VARCHAR(n),  
+ Descrição VARCHAR(n) PRIMARY KEY,  
+); 
+
+CREATE TABLE Fornecedor_Produto 
+( 
+ id_Fornecedor INT,  
+ id_Produto INT,  
+); 
+
+CREATE TABLE Produto_Venda 
+( 
+ id_Produto INT,  
+ Num_Fiscal INT PRIMARY KEY,  
+ Quantidade INT,  
+ Preço FLOAT,  
+); 
+
+CREATE TABLE Loja 
+( 
+ Nome VARCHAR(n),  
+ CNPJ INT,  
+ Código INT PRIMARY KEY,  
+); 
+
+CREATE TABLE Cliente 
+( 
+ Nome VARCHAR(n),  
+ Endereço VARCHAR(n),  
+ Código INT PRIMARY KEY,  
+); 
+
+CREATE TABLE Venda 
+( 
+ Num_Fiscal INT,  
+ Valor_Total FLOAT,  
+ id_Loja INT,  
+ id_Cliente INT,  
+ Data DATE,  
+); 
+
+ALTER TABLE Fornecedor_Produto ADD FOREIGN KEY(id_Fornecedor) REFERENCES Fornecedor (id_Fornecedor)
+ALTER TABLE Fornecedor_Produto ADD FOREIGN KEY(id_Produto) REFERENCES Produto (id_Produto)
+ALTER TABLE Produto_Venda ADD FOREIGN KEY(id_Produto) REFERENCES Produto (id_Produto)
+ALTER TABLE Venda ADD FOREIGN KEY(Num_Fiscal) REFERENCES Produto_Venda (Num_Fiscal)
+ALTER TABLE Venda ADD FOREIGN KEY(id_Loja) REFERENCES Loja (id_Loja)
+ALTER TABLE Venda ADD FOREIGN KEY(id_Cliente) REFERENCES Cliente (id_Cliente)
